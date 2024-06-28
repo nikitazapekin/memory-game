@@ -112,14 +112,28 @@ canvas.addEventListener('click', function (event) {
 
                 console.log(JSON.stringify(selectedElements));
                 if (selectedElements.first == selectedElements.second) {
-                    //  alert(1);
                     playersStep == true ? firstPlayerCounter++ : secondPlayerCounter++
                     playersStep == true ? player1.textContent = `Player 1: ${firstPlayerCounter}` : player2.textContent = `Player 2: ${secondPlayerCounter}`
                     selectedElements.first = "";
                     selectedElements.second = "";
                     countOfSelectedImages = 0;
+
                    
-                cards.every(item=> item.flipped==true  ) ? alert("win" ) : ""
+                    if (cards.every(item => item.flipped == true)) {
+                       let winText = document.querySelector(".win-modal-title")
+                       if(firstPlayerCounter>secondPlayerCounter) {
+                        winText.textContent = "Player 1 win!"
+                       } 
+                       if(firstPlayerCounter<secondPlayerCounter) {
+                        winText.textContent = "Player 2 win!"
+                       } 
+                       if(firstPlayerCounter==secondPlayerCounter) {
+                         winText.textContent = "Draw!"
+                       }
+                        document.querySelector(".win-modal").style.transform = "translateX(0%)"
+                        document.querySelector(".win-modal__overlay").style.opacity = "0.5"
+                    }
+                  
                 }
             } else {
                 playersStep = !playersStep
